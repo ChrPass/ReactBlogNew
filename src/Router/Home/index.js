@@ -6,6 +6,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Alert } from '@material-ui/lab';
+import PopularPosts from '../../components/PopularPosts';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 const Home = () => {
     const [articles, setArticles] = useState([]);
@@ -13,7 +16,7 @@ const Home = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchArticles = () => {
+        const fetchArticles = async () => {
           setError(false);
           setIsLoading(true);
 
@@ -40,15 +43,24 @@ const Home = () => {
     }
 
     return (
-        <div>
-          <List>
-            {articles.map((article) =>
-                <ListItem>
-                    <ListItemText primary={article.title} />
-                </ListItem>
-            )}
-          </List>
-        </div>
+        <Grid container spacing="1">
+            <Grid item xs="8">
+              <Paper>
+                <List>
+                  {articles.map((article) =>
+                      <ListItem>
+                          <ListItemText primary={article.title} />
+                      </ListItem>
+                  )}
+                </List>
+              </Paper>
+            </Grid>
+            <Grid item xs="4">
+              <Paper>
+                <PopularPosts articles={articles} displayItemsNum="3" />
+              </Paper>
+            </Grid>
+        </Grid>
       );
 }
 
