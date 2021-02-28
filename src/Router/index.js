@@ -4,6 +4,7 @@ import Navbar from "../common/Navigation/Navbar";
 import { CustomTheme } from "../common/Themes";
 import { ThemeProvider } from "@material-ui/styles";
 import LoaderProvider from "../hoc/LoaderProvider";
+import ArticleDetails from "./Article/index";
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/Home" component={Home} />
+            <Route path="/Article/:articleId" component={ArticleDetails} />
           </Switch>
         </ThemeProvider>
       </LoaderProvider>
