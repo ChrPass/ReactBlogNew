@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import {GET_ARTICLES} from '../../api';
+import { LoaderContext } from "../../hoc/LoaderProvider";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -12,23 +13,22 @@ import Paper from '@material-ui/core/Paper';
 
 const Home = () => {
     const [articles, setArticles] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const setLoader = useContext(LoaderContext);
 
     useEffect(() => {
         const fetchArticles = async () => {
           setError(false);
-          setIsLoading(true);
+          setLoader(true);
 
           axios.get(GET_ARTICLES)
             .then(response => {
                 setArticles(response.data);
-                setIsLoading(false);
             })
             .catch(error => {
               setError(error);
-              setIsLoading(false);
-            });
+            })
+            .finally(() => setLoader(false));
         };
 
         fetchArticles();
@@ -36,10 +36,6 @@ const Home = () => {
 
     if (error) {
         return <Alert severity="error">{error.message}</Alert>
-    }
-
-    if (isLoading) {
-        return <CircularProgress />;
     }
 
     return (
