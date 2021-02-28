@@ -1,6 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Home/index";
-import Navbar from "../common/Navbar";
+import Navbar from "../common/Navigation/Navbar";
 import {CustomTheme} from "../common/Themes";
 import { ThemeProvider } from "@material-ui/styles";
 
