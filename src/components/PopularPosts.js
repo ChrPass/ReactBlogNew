@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -29,20 +29,15 @@ const PopularPosts = ({articles, displayItemsNum}) => {
 
   const classes = useStyles();
 
-  const [popularArticles, setPopularArticles] = useState([]);
+  const filterPopular = () => {
+      // Order articles by reactions count descending
+      let sorted = articles.sort((a1,a2) =>
+            (a1.public_reactions_count > a2.public_reactions_count) ? 1 :
+                ((a1.public_reactions_count < a2.public_reactions_count) ? -1 : 0)).reverse();
+      // ... and get the first N of them
+      return sorted.slice(0,displayItemsNum);
+  };
 
-  useEffect(() => {
-        const filterPopular = () => {
-          // Order articles by reactions count descending
-          let sorted = articles.sort((a1,a2) =>
-                (a1.public_reactions_count > a2.public_reactions_count) ? 1 :
-                    ((a1.public_reactions_count < a2.public_reactions_count) ? -1 : 0)).reverse();
-          // ... and get the first N of them
-          setPopularArticles(sorted.slice(0,displayItemsNum))
-        };
-
-        filterPopular();
-      }, []);
 
   return (
     <React.Fragment>
@@ -51,7 +46,7 @@ const PopularPosts = ({articles, displayItemsNum}) => {
         </Typography>
         <Divider component="li"/>
         <List className={classes.root}>
-            {popularArticles.map((popularArticle, i) =>
+            {filterPopular(articles).map((popularArticle, i) =>
                 <React.Fragment>
                     <ListItem alignItems="center" key={popularArticle.id}>
                         <ListItemAvatar key={popularArticle.id}>
