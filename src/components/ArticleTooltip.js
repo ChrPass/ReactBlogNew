@@ -7,26 +7,26 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import Tooltip from '@material-ui/core/Tooltip';
 import { toShortDate } from '../common/Utils.js';
 
-const ArticleTooltip = ({article}) => (
+const ArticleTooltip = ({userName, creationDate, commentsCount, reactionsCount}) => (
   <Grid container alignItems="center" spacing="1">
     <Tooltip title="Author">
         <Grid item>
-          <PersonIcon fontSize="small"/>{article.user.name}
+          <PersonIcon fontSize="small"/>{userName}
         </Grid>
     </Tooltip>
     <Tooltip title="Creation date">
         <Grid item>
-          <DateRangeIcon fontSize="small"/>{toShortDate(article.created_at)}
+          <DateRangeIcon fontSize="small"/>{creationDate}
         </Grid>
     </Tooltip>
     <Tooltip title="Comments">
         <Grid item>
-          <QuestionAnswerIcon fontSize="small"/>{article.comments_count}
+          <QuestionAnswerIcon fontSize="small"/>{commentsCount}
         </Grid>
     </Tooltip>
     <Tooltip title="Reactions">
         <Grid item>
-          <VisibilityIcon fontSize="small"/>{article.public_reactions_count}
+          <VisibilityIcon fontSize="small"/>{reactionsCount}
         </Grid>
     </Tooltip>
   </Grid>

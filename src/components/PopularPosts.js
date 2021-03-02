@@ -69,7 +69,8 @@ const PopularPosts = ({articles, displayItemsNum}) => {
                                 className={classes.inline}
                                 color="textPrimary">
                               </Typography>
-                              <ArticleTooltip article={popularArticle}/>
+                              <ArticleTooltip userName={popularArticle.user.name} creationDate={popularArticle.created_at}
+                                commentsCount={popularArticle.comments_count} reactionsCount={popularArticle.public_reactions_count} />
                             </React.Fragment>
                           }
                         />
