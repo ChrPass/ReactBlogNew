@@ -10,11 +10,14 @@ import { Alert } from '@material-ui/lab';
 import PopularPosts from '../../components/PopularPosts';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { useHistory } from "react-router-dom";
 
 const Home = () => {
     const [articles, setArticles] = useState([]);
     const [error, setError] = useState(null);
     const setLoader = useContext(LoaderContext);
+
+    let history = useHistory();
 
     useEffect(() => {
         const fetchArticles = async () => {
@@ -44,10 +47,10 @@ const Home = () => {
               <Paper>
                 <List>
                   {articles.map((article) =>
-                      <ListItem>
-                          <ListItemText primary={article.title} />
+                      <ListItem onClick={() => {history.push(`/Article/${article.id}`)}}>
+                          <ListItemText primary={article.title} secondary={article.public_reactions_count}/>
                       </ListItem>
-                  )}
+                 )}
                 </List>
               </Paper>
             </Grid>

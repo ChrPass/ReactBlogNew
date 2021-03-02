@@ -8,6 +8,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ArticleTooltip from './ArticleTooltip';
+import { useHistory } from "react-router-dom";
 
 const PopularPosts = ({articles, displayItemsNum}) => {
 
@@ -25,9 +26,16 @@ const PopularPosts = ({articles, displayItemsNum}) => {
         height: theme.spacing(10),
         margin: theme.spacing(1)
       },
+    small: {
+        width: theme.spacing(7),
+        height: theme.spacing(7),
+        margin: theme.spacing(1)
+      },
   }));
 
   const classes = useStyles();
+
+   let history = useHistory();
 
   const filterPopular = () => {
       // Order articles by reactions count descending
@@ -38,7 +46,6 @@ const PopularPosts = ({articles, displayItemsNum}) => {
       return sorted.slice(0,displayItemsNum);
   };
 
-
   return (
     <React.Fragment>
         <Typography variant="h6" gutterBottom color="primary">
@@ -48,9 +55,9 @@ const PopularPosts = ({articles, displayItemsNum}) => {
         <List className={classes.root}>
             {filterPopular(articles).map((popularArticle, i) =>
                 <React.Fragment>
-                    <ListItem alignItems="center" key={popularArticle.id}>
+                    <ListItem button={true} onClick={() => {history.push(`/Article/${popularArticle.id}`)}} alignItems="center" key={popularArticle.id}>
                         <ListItemAvatar key={popularArticle.id}>
-                          <Avatar variant="square" src={popularArticle.social_image} className={classes.large} />
+                          <Avatar variant="square" src={popularArticle.social_image} className={classes.small} />
                         </ListItemAvatar>
                         <ListItemText
                           primary={popularArticle.title}
