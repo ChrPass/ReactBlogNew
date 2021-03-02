@@ -5,7 +5,6 @@ import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Tooltip from '@material-ui/core/Tooltip';
-import { toShortDate } from '../common/Utils.js';
 
 const ArticleTooltip = ({userName, creationDate, commentsCount, reactionsCount}) => (
   <Grid container alignItems="center" spacing="1">

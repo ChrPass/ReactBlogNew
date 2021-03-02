@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Alert } from '@material-ui/lab';
 import PopularPosts from '../../components/PopularPosts';
+import TaggedArticles from '../../components/TaggedArticles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from "react-router-dom";
@@ -42,7 +43,10 @@ const Home = () => {
     }
 
     return (
-        <Grid container spacing="1">
+        <Grid container>
+            <Grid item >
+                <TaggedArticles articles={articles} displayItemsNum="3" />
+            </Grid>
             <Grid item xs="8">
               <Paper>
                 <List>
