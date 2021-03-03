@@ -9,7 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import ArticleTooltip from "../../components/ArticleTooltip";
 import Divider from "@material-ui/core/Divider";
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
+import { MyImage, CodeBlock } from "../../common/MarkDownRenderer";
 
 const ArticleDetails = () => {
   const useStyles = makeStyles((theme) => ({
@@ -20,7 +22,7 @@ const ArticleDetails = () => {
       "& > *": {
         margin: theme.spacing(0.5),
       },
-    }
+    },
   }));
 
   const classes = useStyles();
@@ -37,6 +39,7 @@ const ArticleDetails = () => {
       // url: `${process.env.REACT_APP_API_PATH}/articles/${articleId}`,
     })
       .then((res) => {
+        debugger;
         setArticle(res.data);
         setArticleTags(res.data.tags);
         setArticleUser(res.data.user.name);
@@ -45,47 +48,56 @@ const ArticleDetails = () => {
         console.log(err);
       });
   }, []);
-  const Test = article.body_html;
+
   return (
     <div>
-      <Box style={{ height: "400px", width:"100%",
-    backgroundImage: `url(${article.cover_image})`}}>
-      </Box>
+      <Box
+        style={{
+          height: "400px",
+          width: "100%",
+          backgroundImage: `url(${article.cover_image})`,
+        }}
+      ></Box>
       <Grid container spacing="1">
         <Grid item xs="8">
           <Paper>
-            <Grid container spacing="2">
-              <Grid item xs="12" zeroMinWidth>
-                <div className={classes.root}>
-                  {Object.values(articleTags).map((tag, index) => (
-                    <Chip size="small" label={tag} color="primary" />
-                  ))}
-                </div>
-                
+            <Box m={6}>
+              <Grid container spacing="2">
+                <Grid item xs="12" zeroMinWidth>
+                  <div className={classes.root}>
+                    {Object.values(articleTags).map((tag, index) => (
+                      <Chip size="small" label={tag} color="primary" />
+                    ))}
+                  </div>
+
                   {/* {article.title} */}
                   {/* <div> dangerouslySetInnerHTML={{__html: article.title}}</div> */}
-                  <Typography style={{overflowWrap: 'break-word'}}>
-<ReactMarkdown>
-  {article.body_markdown}
-  </ReactMarkdown>
-  </Typography>
-                {/* <Divider />
-                <ArticleTooltip
-                  userName={articleUser}
-                  creationDate={article.created_at}
-                  commentsCount={article.comments_count}
-                  reactionsCount={article.public_reactions_count}
-                /> */}
+                  <Typography
+                    style={{
+                      overflowWrap: "break-word",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    <ReactMarkdown
+                      source={article.body_markdown}
+                      plugins={[gfm]}
+                      renderers={{ image: MyImage, code: CodeBlock }}
+                      className={{
+                        overflowWrap: "break-word",
+                        wordBreak: "break-word",
+                      }}
+                    />
+
+                  </Typography>
+                </Grid>
               </Grid>
-                
-            </Grid>
+            </Box>
           </Paper>
         </Grid>
         <Grid item xs="4">
           <Paper>TODO RANDOM POST</Paper>
         </Grid>
       </Grid>
-    
     </div>
   );
 };
