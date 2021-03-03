@@ -35,8 +35,7 @@ const ArticleDetails = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `${process.env.REACT_APP_API_PATH}/articles/621086`,
-      // url: `${process.env.REACT_APP_API_PATH}/articles/${articleId}`,
+      url: `${process.env.REACT_APP_API_PATH}/articles/${articleId}`,
     })
       .then((res) => {
         debugger;
