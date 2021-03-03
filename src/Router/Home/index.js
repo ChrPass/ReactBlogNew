@@ -9,6 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { Alert } from '@material-ui/lab';
 import PopularPosts from '../../components/PopularPosts';
 import TaggedArticles from '../../components/TaggedArticles';
+import RandomPost from '../../components/RandomPost';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from "react-router-dom";
@@ -61,6 +62,11 @@ const Home = () => {
             <Grid item xs="4">
               <Paper>
                 <PopularPosts articles={articles} displayItemsNum="3" />
+              </Paper>
+            </Grid>
+            <Grid item xs="8">
+              <Paper>
+                <RandomPost articles={articles} displayItemsNum="1"/>
               </Paper>
             </Grid>
         </Grid>
