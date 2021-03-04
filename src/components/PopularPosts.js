@@ -8,7 +8,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ArticleTooltip from './ArticleTooltip';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
+import cloneDeep from 'lodash/cloneDeep';
 
 const PopularPosts = ({articles, displayItemsNum}) => {
 
@@ -37,9 +38,9 @@ const PopularPosts = ({articles, displayItemsNum}) => {
 
    let history = useHistory();
 
-  const filterPopular = () => {
+  const filterPopular = (articles) => {
       // Order articles by reactions count descending
-      let sorted = articles.sort((a1,a2) =>
+      let sorted = cloneDeep(articles).sort((a1,a2) =>
             (a1.public_reactions_count > a2.public_reactions_count) ? 1 :
                 ((a1.public_reactions_count < a2.public_reactions_count) ? -1 : 0)).reverse();
       // ... and get the first N of them

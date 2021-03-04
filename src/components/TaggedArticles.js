@@ -26,6 +26,7 @@ const TaggedArticles = ({articles, tagName, displayItemsNum}) => {
       color: theme.palette.primary.dark,
     },
     titleBar: {
+      cursor: 'pointer',
       background:
         'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     },
@@ -39,29 +40,26 @@ const TaggedArticles = ({articles, tagName, displayItemsNum}) => {
 
   let history = useHistory();
 
-  const filterByTag = () => {
-      // TODO get articles of specific tag
+  const filterByTag = (articles, tag) => {
+      // if tag is specified, filter articles accordingly
+      let taggedArticles = tag ? articles.filter(article => article.tag_list.includes(tag)) : articles;
       // ... and get the first N of them
-      return articles.slice(0,displayItemsNum);
+      return taggedArticles.slice(0,displayItemsNum);
   };
 
   return (
     <React.Fragment>
         <GridList className={classes.gridList}>
-            {filterByTag().map((article, i) =>
+            {filterByTag(articles, tagName).map((article, i) =>
                 <React.Fragment>
-                    <GridListTile key={article.id} onClick={() => {history.push(`/Article/${article.id}`)}}>
+                    <GridListTile key={article.id}>
                         <img  src={article.social_image} alt={article.title} className={classes.tagImage}/>
                         <GridListTileBar
                           title={article.title}
+                          onClick={() => {history.push(`/Article/${article.id}`)}}
                           classes={{
                             root: classes.titleBar,
                           }}
-                          actionIcon={
-                            <IconButton>
-                              <Chip size="small" label={tagName} color="primary"/>
-                            </IconButton>
-                          }
                         />
                     </GridListTile>
                 </React.Fragment>

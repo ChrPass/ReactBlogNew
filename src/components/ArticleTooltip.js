@@ -5,6 +5,7 @@ import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Tooltip from '@material-ui/core/Tooltip';
+import {toShortDate} from '../common/Utils';
 
 const ArticleTooltip = ({userName, creationDate, commentsCount, reactionsCount}) => (
   <Grid container alignItems="center" spacing="1">
@@ -15,7 +16,7 @@ const ArticleTooltip = ({userName, creationDate, commentsCount, reactionsCount})
     </Tooltip>
     <Tooltip title="Creation date">
         <Grid item>
-          <DateRangeIcon fontSize="small"/>{creationDate}
+          <DateRangeIcon fontSize="small"/>{toShortDate(creationDate)}
         </Grid>
     </Tooltip>
     <Tooltip title="Comments">
