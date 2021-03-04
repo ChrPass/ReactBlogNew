@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import {GET_ARTICLES} from '../../api';
+import { GET_ARTICLES } from '../../api';
 import { LoaderContext } from "../../hoc/LoaderProvider";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,62 +15,73 @@ import Paper from '@material-ui/core/Paper';
 import { useHistory } from "react-router-dom";
 
 const Home = () => {
-    const [articles, setArticles] = useState([]);
-    const [error, setError] = useState(null);
-    const setLoader = useContext(LoaderContext);
+  const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(null);
+  const setLoader = useContext(LoaderContext);
 
-    let history = useHistory();
+  let history = useHistory();
 
-    useEffect(() => {
-        const fetchArticles = async () => {
-          setError(false);
-          setLoader(true);
+  useEffect(() => {
+    const fetchArticles = async () => {
+      setError(false);
+      setLoader(true);
 
-          axios.get(GET_ARTICLES)
-            .then(response => {
-                setArticles(response.data);
-            })
-            .catch(error => {
-              setError(error);
-            })
-            .finally(() => setLoader(false));
-        };
+      axios.get(GET_ARTICLES)
+        .then(response => {
+          setArticles(response.data);
+        })
+        .catch(error => {
+          setError(error);
+        })
+        .finally(() => setLoader(false));
+    };
 
-        fetchArticles();
-      }, []);
+    fetchArticles();
+  }, []);
 
-    if (error) {
-        return <Alert severity="error">{error.message}</Alert>
-    }
+  if (error) {
+    return <Alert severity="error">{error.message}</Alert>
+  }
 
-    return (
-        <Grid container>
-            <Grid item >
-                <TaggedArticles articles={articles} displayItemsNum="3" />
+  return (
+    <Grid container>
+      <Grid item >
+        <TaggedArticles articles={articles} displayItemsNum="3" />
+      </Grid>
+      <Grid item xs="8">
+        <Paper>
+          <List>
+            {articles.map((article) =>
+              <ListItem onClick={() => { history.push(`/Article/${article.id}`) }}>
+                <ListItemText primary={article.title} secondary={article.public_reactions_count} />
+              </ListItem>
+            )}
+          </List>
+        </Paper>
+      </Grid>
+      <Grid item xs={4}>
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+        >
+          <Paper>
+            <Grid item xs>
+
+              <PopularPosts articles={articles} displayItemsNum="3" />
+
             </Grid>
-            <Grid item xs="8">
+            <Grid item xs>
               <Paper>
-                <List>
-                  {articles.map((article) =>
-                      <ListItem onClick={() => {history.push(`/Article/${article.id}`)}}>
-                          <ListItemText primary={article.title} secondary={article.public_reactions_count}/>
-                      </ListItem>
-                 )}
-                </List>
+                <RandomPost articles={articles} displayItemsNum="1" />
               </Paper>
             </Grid>
-            <Grid item xs="4">
-              <Paper>
-                <PopularPosts articles={articles} displayItemsNum="3" />
-              </Paper>
-            </Grid>
-            <Grid item xs="8">
-              <Paper>
-                <RandomPost articles={articles} displayItemsNum="1"/>
-              </Paper>
-            </Grid>
+          </Paper>
         </Grid>
-      );
+      </Grid>
+    </Grid>
+  );
 }
 
 export default Home;
