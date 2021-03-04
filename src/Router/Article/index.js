@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect, dangerouslySetInnerHTML } from "react";
+import { useState, useEffect, useContext } from "react";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
@@ -7,8 +7,7 @@ import Chip from "@material-ui/core/Chip";
 import { useParams } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import ArticleTooltip from "../../components/ArticleTooltip";
-import Divider from "@material-ui/core/Divider";
+import { LoaderContext } from "../../hoc/LoaderProvider";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import { MyImage, CodeBlock } from "../../common/MarkDownRenderer";
@@ -31,20 +30,24 @@ const ArticleDetails = () => {
   const [article, setArticle] = useState([]);
   const [articleTags, setArticleTags] = useState([]);
   const [articleUser, setArticleUser] = useState([]);
+  const setLoader = useContext(LoaderContext);
 
   useEffect(() => {
+    setLoader(true);
     axios({
       method: "get",
       url: `${process.env.REACT_APP_API_PATH}/articles/${articleId}`,
     })
       .then((res) => {
-        debugger;
         setArticle(res.data);
         setArticleTags(res.data.tags);
         setArticleUser(res.data.user.name);
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoader(false);
       });
   }, []);
 
@@ -52,8 +55,10 @@ const ArticleDetails = () => {
     <div>
       <Box
         style={{
-          height: "400px",
+          height: "500px",
           width: "100%",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
           backgroundImage: `url(${article.cover_image})`,
         }}
       ></Box>

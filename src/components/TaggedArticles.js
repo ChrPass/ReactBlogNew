@@ -21,7 +21,7 @@ const TaggedArticles = ({articles, tagName, displayItemsNum}) => {
       flexWrap: 'nowrap',
       // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
       transform: 'translateZ(0)',
-      margin: "0 !important",
+      margin: "-2px 0px 0px 0px !important",
       height: 300
     },
     gridListTile: {
