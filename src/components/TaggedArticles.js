@@ -21,6 +21,11 @@ const TaggedArticles = ({articles, tagName, displayItemsNum}) => {
       flexWrap: 'nowrap',
       // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
       transform: 'translateZ(0)',
+      margin: "0 !important",
+      height: 300
+    },
+    gridListTile: {
+      height: "100% !important"
     },
     title: {
       color: theme.palette.primary.dark,
@@ -31,8 +36,7 @@ const TaggedArticles = ({articles, tagName, displayItemsNum}) => {
         'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     },
     tagImage: {
-        width: "auto",
-        maxHeight: "150px"
+        width: "100%",
     }
   }));
 
@@ -49,10 +53,9 @@ const TaggedArticles = ({articles, tagName, displayItemsNum}) => {
 
   return (
     <React.Fragment>
-        <GridList className={classes.gridList}>
+        <GridList classes={{root: classes.gridList}} cols={3} >
             {filterByTag(articles, tagName).map((article, i) =>
-                <React.Fragment>
-                    <GridListTile key={article.id}>
+                    <GridListTile key={article.id} cols={1} className={classes.gridListTile}>
                         <img  src={article.social_image} alt={article.title} className={classes.tagImage}/>
                         <GridListTileBar
                           title={article.title}
@@ -62,7 +65,6 @@ const TaggedArticles = ({articles, tagName, displayItemsNum}) => {
                           }}
                         />
                     </GridListTile>
-                </React.Fragment>
             )}
         </GridList>
     </React.Fragment>
