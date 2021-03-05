@@ -10,6 +10,7 @@ import { Alert } from '@material-ui/lab';
 import PopularPosts from '../../components/PopularPosts';
 import TaggedArticles from '../../components/TaggedArticles';
 import RandomPost from '../../components/RandomPost';
+import MainArticles from '../../components/MainArticles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from "react-router-dom";
@@ -50,13 +51,7 @@ const Home = () => {
       </Grid>
       <Grid item xs="8">
         <Paper>
-          <List>
-            {articles.map((article) =>
-              <ListItem onClick={() => { history.push(`/Article/${article.id}`) }}>
-                <ListItemText primary={article.title} secondary={article.public_reactions_count} />
-              </ListItem>
-            )}
-          </List>
+          <MainArticles articles={articles} displayItemsNum="3"/>
         </Paper>
       </Grid>
       <Grid item xs={4}>

@@ -68,7 +68,6 @@ const RandomPost = ({articles, displayItemsNum}) => {
                                 className={classes.inline}
                                 color="textPrimary">
                               </Typography>
-                              <ArticleTooltip article={randomArticle}/>
                             </React.Fragment>
                           }
                         />
