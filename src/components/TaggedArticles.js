@@ -4,8 +4,6 @@ import { useHistory } from "react-router-dom";
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import Chip from '@material-ui/core/Chip';
 
 const TaggedArticles = ({articles, tagName, displayItemsNum}) => {
 

@@ -69,7 +69,7 @@ const Home = () => {
             </Grid>
             <Grid item xs>
               <Paper>
-                <RandomPost articles={articles} displayItemsNum="1" />
+                <RandomPost articles={articles}/>
               </Paper>
             </Grid>
           </Paper>

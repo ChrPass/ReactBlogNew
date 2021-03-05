@@ -50,7 +50,7 @@ const PopularPosts = ({articles, displayItemsNum}) => {
   return (
     <React.Fragment>
         <Typography variant="h6" gutterBottom color="primary">
-         POPULAR POSTS
+         Popular Posts
         </Typography>
         <Divider component="li"/>
         <List className={classes.root}>
