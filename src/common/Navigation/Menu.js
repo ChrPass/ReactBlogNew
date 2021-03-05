@@ -1,10 +1,8 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -25,12 +23,12 @@ export default function SimpleBottomNavigation() {
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction label="HOME"/>
-      <BottomNavigationAction label="LIFE STYLE" />
-      <BottomNavigationAction label="TRAVEL" />
-      <BottomNavigationAction label="FASHION" />
-      <BottomNavigationAction label="GALLARY" />
-      <BottomNavigationAction label="CONTACT" />
+      <BottomNavigationAction component={Link} to="/Home" label="HOME" />
+      <BottomNavigationAction component={Link} to="/Home" label="LIFE STYLE" />
+      <BottomNavigationAction component={Link} to="/Home" label="TRAVEL" />
+      <BottomNavigationAction component={Link} to="/Home" label="FASHION" />
+      <BottomNavigationAction component={Link} to="/Home" label="GALLARY" />
+      <BottomNavigationAction component={Link} to="/Home" label="CONTACT" />
     </BottomNavigation>
   );
 }
