@@ -51,7 +51,7 @@ const Home = () => {
       </Grid>
       <Grid item xs="8">
         <Paper>
-          <MainArticles articles={articles} displayItemsNum="3"/>
+          <MainArticles articles={articles} startFromItem="4"/>
         </Paper>
       </Grid>
       <Grid item xs={4}>

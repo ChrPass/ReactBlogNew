@@ -20,7 +20,7 @@ import Button from '@material-ui/core/Button';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 
-const MainArticles = ({articles, tagName, displayItemsNum}) => {
+const MainArticles = ({articles, tagName, startFromItem}) => {
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,17 +53,18 @@ const MainArticles = ({articles, tagName, displayItemsNum}) => {
 
   let history = useHistory();
 
-  const filterByTag = (articles, tag) => {
+  const getFromIndex = (articles, tag, startFromItem) => {
       // if tag is specified, filter articles accordingly
       let mainArticles = tag ? articles.filter(article => article.tag_list.includes(tag)) : articles;
-      // ... and get the first N of them
-      return mainArticles.slice(0,displayItemsNum);
+      // ... and return them starting from the specified index
+      return (mainArticles && mainArticles.length > 0) ?
+        mainArticles.slice(startFromItem - 1, mainArticles.length - 1) : mainArticles;
   };
 
   return (
     <React.Fragment>
         <List className={classes.root}>
-            {filterByTag(articles, tagName).map((article, i) =>
+            {getFromIndex(articles, tagName, startFromItem).map((article, i) =>
                 <React.Fragment>
                     <ListItem button={true} onClick={() => {history.push(`/Article/${article.id}`)}} alignItems="center" key={article.id}>
                         <Card className={classes.root}>
