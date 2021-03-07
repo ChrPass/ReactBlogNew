@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
     text: {
@@ -40,7 +41,9 @@ const Footer = () => {
     return (
         <AppBar position="relative" color="primary" className={classes.appBar}>
             <Toolbar>
-                <p>aaa</p>
+                <Typography color="textSecondary" variant="caption" display="block" gutterBottom>
+                  Christos Pasiopoulos DG-8, Dimitris Glikiotis DG-11, Evgenia Maniati DG-1
+                </Typography>
             </Toolbar>
         </AppBar>
     )

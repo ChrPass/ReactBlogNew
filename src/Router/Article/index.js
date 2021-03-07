@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
