@@ -24,11 +24,8 @@ export default function SimpleBottomNavigation() {
       className={classes.root}
     >
       <BottomNavigationAction component={Link} to="/Home" label="HOME" />
-      <BottomNavigationAction component={Link} to="/Home" label="LIFE STYLE" />
-      <BottomNavigationAction component={Link} to="/Home" label="TRAVEL" />
-      <BottomNavigationAction component={Link} to="/Home" label="FASHION" />
-      <BottomNavigationAction component={Link} to="/Home" label="GALLARY" />
-      <BottomNavigationAction component={Link} to="/Home" label="CONTACT" />
-    </BottomNavigation>
+      <BottomNavigationAction component={Link} to="/Beginners" label="For Beginners" />
+      <BottomNavigationAction component={Link} to="/WebDev" label="Web Development" />
+      </BottomNavigation>
   );
 }

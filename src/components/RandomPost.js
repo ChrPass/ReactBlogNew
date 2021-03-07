@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 
-const RandomPost = ({articles}) => {
+const RandomPost = ({articles = []}) => {
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,9 +31,8 @@ const RandomPost = ({articles}) => {
    let history = useHistory();
 
   const findRandom = () => {
-      // Order articles by reactions count descending
       let size = articles.length;
-      let randomNum = Math.floor((Math.random() * size) + 1);
+      let randomNum = Math.floor((Math.random() * size));
       let randomArt = size > 0 ? [articles[randomNum]] : [];
       return randomArt;
   };

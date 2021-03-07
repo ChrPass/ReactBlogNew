@@ -15,6 +15,8 @@ const Router = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/Home" component={Home} />
+            <Route path="/WebDev" component={Home} />
+            <Route path="/Beginners" component={Home} />
             <Route path="/Article/:articleId" component={ArticleDetails} />
           </Switch>
         </ThemeProvider>
