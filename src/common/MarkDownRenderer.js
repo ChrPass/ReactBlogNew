@@ -11,5 +11,5 @@ export const CodeBlock = ({ language, value }) => {
 };
 
 export const MyImage = (props) => {
-  return <img {...props} style={{ maxWidth: "50vw" }} />;
+  return <img {...props} style={{ maxWidth: "100%" }} />;
 };

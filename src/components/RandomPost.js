@@ -48,7 +48,7 @@ const RandomPost = ({articles = []}) => {
                 spacing={0}
                 alignItems="center"
                 justify="center">
-                   <Card className={classes.root} onClick={() => {history.push(`/Article/${randomArticle.id}`)}}>
+                   <Card className={classes.root} onClick={() => {history.push(`/Article/${randomArticle.id}`)}} className={classes.media}>
                      <CardActionArea>
                        <CardMedia
                          component="img"
