@@ -15,6 +15,9 @@ import { getArticles, getArticle } from "../../api/index";
 import RandomPost from "../../components/RandomPost";
 import PopularPosts from "../../components/PopularPosts";
 import ArticleTooltip from "../../components/ArticleTooltip";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import Card from "@material-ui/core/Card";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +35,24 @@ const useStyles = makeStyles((theme) => ({
     overflowWrap: "break-word",
     wordBreak: "break-word",
   },
+  imageTitle: {
+    background: "#666666",
+    position: "absolute",
+    color: "#ffffff",
+    top: "50%",
+    left: "20%",
+    transform: "translateX(-50%)",
+    maxWidth: "400px",
+    overflowWrap: "break-word",
+    wordBreak: "break-word",
+  },
+  card:{
+    boxShadow:0,
+  },
+  cardContent:{
+    padding:0,
+    paddingBottom: 0,
+  }
 }));
 
 const ArticleDetails = () => {
@@ -52,7 +73,9 @@ const ArticleDetails = () => {
       setLoader(false);
       return;
     }
-
+    {
+      console.log(article);
+    }
     setArticle(articleRes.details.data);
     setArticleTags(articleRes.details.data.tags);
     setAllArticles(allArticlesRes.error ? [] : allArticlesRes.details.data);
@@ -69,7 +92,7 @@ const ArticleDetails = () => {
     <div>
       {article && (
         <>
-          <Box
+          {/* <Box
             style={{
               height: "500px",
               width: "100%",
@@ -77,7 +100,22 @@ const ArticleDetails = () => {
               backgroundRepeat: "no-repeat",
               backgroundImage: `url(${article.cover_image})`,
             }}
-          ></Box>
+
+            display="flex"
+            justifyContent="flex-start"
+            alignItems="center"
+          ><Typography variant="h5">TEST</Typography></Box> */}
+
+          <Card elevation={0} classes={{root: classes.card}}>
+            <CardContent classes={{root: classes.cardContent}}>
+              <CardMedia
+                component="img"
+                className={classes.media}
+                image={article.cover_image}
+                // title={article.title}
+              />
+            </CardContent>
+          </Card>
           <Container>
             <Grid container spacing={1}>
               <Grid item xs={8}>
