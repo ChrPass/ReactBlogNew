@@ -14,6 +14,7 @@ import gfm from "remark-gfm";
 import { MyImage, CodeBlock } from "../../common/MarkDownRenderer";
 import { getArticles, getArticle } from "../../api/index";
 import RandomPost from "../../components/RandomPost";
+import PopularPosts from "../../components/PopularPosts";
 import ArticleTooltip from "../../components/ArticleTooltip";
 
 const useStyles = makeStyles((theme) => ({
@@ -79,12 +80,12 @@ const ArticleDetails = () => {
             }}
           ></Box>
           <Container>
-            <Grid container spacing="1">
-              <Grid item xs="8">
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
                 <Paper>
                   <Box m={6}>
-                    <Grid container spacing="2">
-                      <Grid item xs="12" zeroMinWidth>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} zeroMinWidth>
                         <Grid
                           container
                           direction="column"
@@ -98,7 +99,7 @@ const ArticleDetails = () => {
                               variant="h4"
                             >
                               <Box fontWeight="fontWeightBold">
-                              {article.title}
+                                {article.title}
                               </Box>
                             </Typography>
                           </Grid>
@@ -136,8 +137,27 @@ const ArticleDetails = () => {
                   </Box>
                 </Paper>
               </Grid>
-              <Grid item xs="4">
-                <RandomPost articles={allArticles} />
+              <Grid item xs={4}>
+                <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
+                >
+                  <Paper>
+                    <Grid item xs>
+                      <PopularPosts
+                        articles={allArticles}
+                        displayItemsNum={3}
+                      />
+                    </Grid>
+                    <Grid item xs>
+                      <Paper>
+                        <RandomPost articles={allArticles} />
+                      </Paper>
+                    </Grid>
+                  </Paper>
+                </Grid>
               </Grid>
             </Grid>
           </Container>
