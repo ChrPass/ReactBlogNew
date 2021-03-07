@@ -2,10 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { GET_ARTICLES } from '../../api';
 import { LoaderContext } from "../../hoc/LoaderProvider";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { Alert } from '@material-ui/lab';
 import PopularPosts from '../../components/PopularPosts';
 import TaggedArticles from '../../components/TaggedArticles';
@@ -13,29 +9,28 @@ import RandomPost from '../../components/RandomPost';
 import MainArticles from '../../components/MainArticles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { useHistory } from "react-router-dom";
+import { getArticles } from "../../api/index";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
   const setLoader = useContext(LoaderContext);
 
-  let history = useHistory();
+  const fetchArticles = async () => {
+    setError(false);
+    setLoader(true);
+    const res = await getArticles();
+
+    if (res.error) {
+      setError(res.error);
+      setLoader(false)
+      return;
+    }
+    setArticles(res.details.data);
+    setLoader(false)
+  };
 
   useEffect(() => {
-    const fetchArticles = async () => {
-      setError(false);
-      setLoader(true);
-
-      axios.get(GET_ARTICLES)
-        .then(response => {
-          setArticles(response.data);
-        })
-        .catch(error => {
-          setError(error);
-        })
-        .finally(() => setLoader(false));
-    };
 
     fetchArticles();
   }, []);
@@ -51,7 +46,7 @@ const Home = () => {
       </Grid>
       <Grid item xs="8">
         <Paper>
-          <MainArticles articles={articles} startFromItem="4"/>
+          <MainArticles articles={articles} startFromItem="4" />
         </Paper>
       </Grid>
       <Grid item xs={4}>
@@ -69,7 +64,7 @@ const Home = () => {
             </Grid>
             <Grid item xs>
               <Paper>
-                <RandomPost articles={articles}/>
+                <RandomPost articles={articles} />
               </Paper>
             </Grid>
           </Paper>

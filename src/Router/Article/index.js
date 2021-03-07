@@ -11,6 +11,8 @@ import { LoaderContext } from "../../hoc/LoaderProvider";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import { MyImage, CodeBlock } from "../../common/MarkDownRenderer";
+import { getArticles, getArticle } from "../../api/index";
+import RandomPost from '../../components/RandomPost';
 
 const ArticleDetails = () => {
   const useStyles = makeStyles((theme) => ({
@@ -28,27 +30,33 @@ const ArticleDetails = () => {
 
   const { articleId } = useParams();
   const [article, setArticle] = useState([]);
+  const [allArticles, setAllArticles] = useState([]);
   const [articleTags, setArticleTags] = useState([]);
   const [articleUser, setArticleUser] = useState([]);
   const setLoader = useContext(LoaderContext);
 
+  const fetchArticles = async () => {
+    setLoader(true);
+    const allArticlesRes = await getArticles();
+
+    const articleRes = await getArticle(articleId);
+
+    if (articleRes.error) {
+      setLoader(false)
+      return;
+    }
+
+    setArticle(articleRes.details.data);
+    setArticleTags(articleRes.details.data.tags);
+    setArticleUser(articleRes.details.data.user.name);
+    setAllArticles(allArticlesRes.error ? [] : allArticlesRes.details.data);
+    setLoader(false)
+  };
+
   useEffect(() => {
     setLoader(true);
-    axios({
-      method: "get",
-      url: `${process.env.REACT_APP_API_PATH}/articles/${articleId}`,
-    })
-      .then((res) => {
-        setArticle(res.data);
-        setArticleTags(res.data.tags);
-        setArticleUser(res.data.user.name);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoader(false);
-      });
+
+    fetchArticles();
   }, []);
 
   return (
@@ -99,7 +107,7 @@ const ArticleDetails = () => {
           </Paper>
         </Grid>
         <Grid item xs="4">
-          <Paper>TODO RANDOM POST</Paper>
+          <RandomPost articles={allArticles} />
         </Grid>
       </Grid>
     </div>
