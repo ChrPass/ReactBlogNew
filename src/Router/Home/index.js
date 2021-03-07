@@ -66,35 +66,37 @@ const Home = () => {
 
   return (
     <Container>
-      <Grid container>
-        <Grid item>
-          <TaggedArticles articles={articles} displayItemsNum="3" />
-        </Grid>
-        <Grid item xs={8}>
-          <Paper>
-            <MainArticles articles={articles} startFromItem="4" />
-          </Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-          >
+      {articles.length > 0 && (
+        <Grid container>
+          <Grid item>
+            <TaggedArticles articles={articles} displayItemsNum="3" />
+          </Grid>
+          <Grid item xs={8}>
             <Paper>
-              <Grid item xs>
-                <PopularPosts articles={articles} displayItemsNum="3" />
-              </Grid>
-              <Grid item xs>
-                <Paper>
-                  <RandomPost articles={articles} />
-                </Paper>
-              </Grid>
+              <MainArticles articles={articles} startFromItem="4" />
             </Paper>
           </Grid>
+          <Grid item xs={4}>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <Paper>
+                <Grid item xs>
+                  <PopularPosts articles={articles} displayItemsNum="3" />
+                </Grid>
+                <Grid item xs>
+                  <Paper>
+                    <RandomPost articles={articles} />
+                  </Paper>
+                </Grid>
+              </Paper>
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </Container>
   );
 };
