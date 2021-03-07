@@ -5,6 +5,7 @@ export const CustomTheme = createMuiTheme({
     primary: {
       main: "#3f51b5",
       appBar: "#ffffff",
+      footer: "#f2f2f2",
       darkText: "#000000",
     },
   },
