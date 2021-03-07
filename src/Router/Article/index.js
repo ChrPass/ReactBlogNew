@@ -58,7 +58,7 @@ const ArticleDetails = () => {
     setLoader(true);
 
     fetchArticles();
-  }, []);
+  }, [articleId]);
 
   return (
     <div>
