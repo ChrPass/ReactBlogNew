@@ -55,9 +55,9 @@ const PopularPosts = ({articles, displayItemsNum}) => {
         <Divider component="li"/>
         <List className={classes.root}>
             {filterPopular(articles).map((popularArticle, i) =>
-                <React.Fragment>
-                    <ListItem button={true} onClick={() => {history.push(`/Article/${popularArticle.id}`)}} alignItems="center" key={popularArticle.id}>
-                        <ListItemAvatar key={popularArticle.id}>
+                <div key={popularArticle.id}>
+                    <ListItem button={true} onClick={() => {history.push(`/Article/${popularArticle.id}`)}} alignItems="center" >
+                        <ListItemAvatar >
                           <Avatar variant="square" src={popularArticle.social_image} className={classes.small} />
                         </ListItemAvatar>
                         <ListItemText
@@ -77,7 +77,7 @@ const PopularPosts = ({articles, displayItemsNum}) => {
                         />
                     </ListItem>
                     <Divider variant="inset" component="li" key={i}/>
-                </React.Fragment>
+                </div>
             )}
         </List>
     </React.Fragment>

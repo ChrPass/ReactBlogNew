@@ -70,7 +70,7 @@ const Home = () => {
         <Grid item>
           <TaggedArticles articles={articles} displayItemsNum="3" />
         </Grid>
-        <Grid item xs="8">
+        <Grid item xs={8}>
           <Paper>
             <MainArticles articles={articles} startFromItem="4" />
           </Paper>

@@ -44,9 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const MainArticles = ({ articles, tagName, startFromItem }) => {
-
   const classes = useStyles();
 
   let history = useHistory();
@@ -66,37 +64,36 @@ const MainArticles = ({ articles, tagName, startFromItem }) => {
     <React.Fragment>
       <List className={classes.root}>
         {getFromIndex(articles, tagName, startFromItem).map((article, i) => (
-          <React.Fragment>
+          <div key={article.id}>
             <ListItem
               // button={true}
               alignItems="center"
-              key={article.id}
             >
               <Card className={classes.root}>
                 {/* <CardActionArea> */}
-                  <CardMedia
-                    component="img"
-                    className={classes.media}
-                    image={article.social_image}
+                <CardMedia
+                  component="img"
+                  className={classes.media}
+                  image={article.social_image}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {article.title}
+                  </Typography>
+                  <ArticleTooltip
+                    userName={article.user.name}
+                    creationDate={article.created_at}
+                    commentsCount={article.comments_count}
+                    reactionsCount={article.public_reactions_count}
                   />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {article.title}
-                    </Typography>
-                    <ArticleTooltip
-                      userName={article.user.name}
-                      creationDate={article.created_at}
-                      commentsCount={article.comments_count}
-                      reactionsCount={article.public_reactions_count}
-                    />
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      {article.description}
-                    </Typography>
-                  </CardContent>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {article.description}
+                  </Typography>
+                </CardContent>
                 {/* </CardActionArea> */}
                 <CardActions className={classes.cardActions}>
                   <Box display="flex" width={1} justifyContent="flex-end">
@@ -116,7 +113,7 @@ const MainArticles = ({ articles, tagName, startFromItem }) => {
               </Card>
             </ListItem>
             <Divider variant="inset" component="li" key={i} />
-          </React.Fragment>
+          </div>
         ))}
       </List>
     </React.Fragment>

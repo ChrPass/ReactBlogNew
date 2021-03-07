@@ -8,7 +8,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import {toShortDate} from '../common/Utils';
 
 const ArticleTooltip = ({userName, creationDate, commentsCount, reactionsCount}) => (
-  <Grid container alignItems="center" spacing="1">
+  <Grid container alignItems="center" spacing={1}>
     <Tooltip title="Author">
         <Grid item>
           <PersonIcon fontSize="small"/>{userName}

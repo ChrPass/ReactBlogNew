@@ -46,13 +46,13 @@ const useStyles = makeStyles((theme) => ({
     overflowWrap: "break-word",
     wordBreak: "break-word",
   },
-  card:{
-    boxShadow:0,
+  card: {
+    boxShadow: 0,
   },
-  cardContent:{
-    padding:0,
+  cardContent: {
+    padding: 0,
     paddingBottom: 0,
-  }
+  },
 }));
 
 const ArticleDetails = () => {
@@ -73,9 +73,7 @@ const ArticleDetails = () => {
       setLoader(false);
       return;
     }
-    {
-      console.log(article);
-    }
+
     setArticle(articleRes.details.data);
     setArticleTags(articleRes.details.data.tags);
     setAllArticles(allArticlesRes.error ? [] : allArticlesRes.details.data);
@@ -92,26 +90,16 @@ const ArticleDetails = () => {
     <div>
       {article && (
         <>
-          {/* <Box
-            style={{
-              height: "500px",
-              width: "100%",
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundImage: `url(${article.cover_image})`,
-            }}
-
-            display="flex"
-            justifyContent="flex-start"
-            alignItems="center"
-          ><Typography variant="h5">TEST</Typography></Box> */}
-
-          <Card elevation={0} classes={{root: classes.card}}>
-            <CardContent classes={{root: classes.cardContent}}>
+          <Card elevation={0} classes={{ root: classes.card }}>
+            <CardContent classes={{ root: classes.cardContent }}>
               <CardMedia
                 component="img"
                 className={classes.media}
-                image={article.cover_image}
+                image={
+                  article.cover_image
+                    ? article.cover_image
+                    : article.social_image
+                }
                 // title={article.title}
               />
             </CardContent>
@@ -145,6 +133,7 @@ const ArticleDetails = () => {
                             <div className={classes.root}>
                               {Object.values(articleTags).map((tag, index) => (
                                 <Chip
+                                  key={index}
                                   size="small"
                                   label={tag}
                                   color="primary"
@@ -161,14 +150,12 @@ const ArticleDetails = () => {
                             />
                           </Grid>
                         </Grid>
-                        <Typography className={classes.breakWord}>
-                          <ReactMarkdown
-                            source={article.body_markdown}
-                            plugins={[gfm]}
-                            renderers={{ image: MyImage, code: CodeBlock }}
-                            className={classes.breakWord}
-                          />
-                        </Typography>
+                        <ReactMarkdown
+                          source={article.body_markdown}
+                          plugins={[gfm]}
+                          renderers={{ image: MyImage, code: CodeBlock }}
+                          className={classes.breakWord}
+                        />
                       </Grid>
                     </Grid>
                   </Box>

@@ -43,8 +43,10 @@ const RandomPost = ({articles = []}) => {
            Random Post
            <Divider component="li"/>
           </Typography>
-              {findRandom(articles).map((randomArticle) =>
+              {findRandom(articles).map((randomArticle, index) =>
               <Grid
+              container
+                key={index}
                 spacing={0}
                 alignItems="center"
                 justify="center">
